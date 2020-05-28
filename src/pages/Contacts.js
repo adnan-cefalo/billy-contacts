@@ -13,7 +13,8 @@ function Contacts() {
     const query = useQuery();
     const queryValues = {
         isArchived: query.get("isArchived") !== null && query.get("isArchived") !== "false",
-        country: query.get("country") || ""
+        country: query.get("country") || "",
+        page: parseInt(query.get("page")) || 1
     };
     const [countries, setCountries] = useState([]);
 

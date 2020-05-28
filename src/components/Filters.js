@@ -27,7 +27,7 @@ function Filters(props) {
                     <input className="form-check-input" type="checkbox" name="isArchived" id="is-archived"
                            checked={query.isArchived}
                            onChange={e => {
-                               updateRouteParams(history, {...query, isArchived: e.target.checked})
+                               updateRouteParams(history, {...query, isArchived: e.target.checked, page: 1})
                            }}/>
                     <label className="form-check-label" htmlFor="is-archived">
                         Is Archived
