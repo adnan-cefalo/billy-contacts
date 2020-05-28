@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Bootstrap.scss';
 import {BrowserRouter as Router} from "react-router-dom";
 import Contacts from "./pages/Contacts";
 
