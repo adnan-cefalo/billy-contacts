@@ -5,12 +5,14 @@ import Error from "./Error";
 import Pagination from "./Pagination";
 import {updateRouteParams} from "../utilities/QueryParams";
 import {useHistory} from "react-router-dom";
+import Spinner from "./Spinner";
 
 function ContactsTable(props) {
     const {query: {isArchived, country, page}, onCountriesUpdated} = props;
     const history = useHistory();
     const [contacts, setContacts] = useState([]);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [filteredContacts, setFilteredContacts] = useState([]);
     let [paging, setPaging] = useState({
         page: 1,
@@ -25,7 +27,7 @@ function ContactsTable(props) {
             page,
             pageSize: paging.pageSize
         };
-
+        setLoading(true);
         getContacts(params)
             .then(result => {
                 setContacts(result.contacts);
@@ -35,6 +37,9 @@ function ContactsTable(props) {
             })
             .catch(err => {
                 setError(err.message);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }, [isArchived, page, paging.pageSize]);
 
@@ -57,6 +62,12 @@ function ContactsTable(props) {
     if (error !== null) {
         return (
             <Error message={error} />
+        );
+    }
+
+    if(loading) {
+        return (
+            <Spinner/>
         );
     }
 
